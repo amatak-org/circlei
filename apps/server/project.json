@@ -18,10 +18,12 @@
       },
       "configurations": {
         "development": {
-          "mode": "development"
+          "mode": "development",
+          "host": "0.0.0.0"
         },
         "production": {
-          "mode": "production"
+          "mode": "production",
+          "host": "0.0.0.0"
         }
       }
     },
@@ -29,7 +31,8 @@
       "executor": "@nx/vite:dev-server",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "server:build"
+        "buildTarget": "server:build",
+        "host": "0.0.0.0"
       },
       "configurations": {
         "development": {

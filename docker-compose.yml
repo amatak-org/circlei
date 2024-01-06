@@ -1,0 +1,26 @@
+# !! Attention !!
+# This is a docker-compose file used ONLY for the dev environment and can not be used for production.
+version: '3.5'
+
+services:
+  panel:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: dev
+    user: '1000'
+    working_dir: /app
+    tty: true
+    command: yarn run serve
+    restart: unless-stopped
+    privileged: true
+    environment:
+      - AMATAK_PANEL_ENABLE_CPU_TEMPS=true
+      - AMATAK_PANEL_SPEED_TEST_FROM_PATH=/app/speedtest_result
+    ports:
+      - 3000:3000 # view
+      - 3001:3001 # server
+      - 4200:4200 # Start Page
+    volumes:
+      - ./:/app
+      - /:/mnt/host:ro

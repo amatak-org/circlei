@@ -9,12 +9,12 @@ export default defineConfig({
 
   server: {
     port: 4200,
-    host: '127.0.0.1',
+    host: '0.0.0.0',
   },
 
   preview: {
     port: 4200,
-    host: '127.0.0.1',
+    host: '0.0.0.0',
   },
 
   plugins: [vue(), nxViteTsPaths()],

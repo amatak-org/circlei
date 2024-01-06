@@ -1,0 +1,81 @@
+{
+  "name": "dash",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/dash/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/dash",
+        "main": "apps/dash/src/index.ts",
+        "tsConfig": "apps/dash/tsconfig.app.json",
+        "assets": [],
+        "isolatedConfig": true,
+        "webpackConfig": "apps/dash/webpack.config.js"
+      },
+      "configurations": {
+        "development": {},
+        "production": {
+          "externalDependencies": "none",
+          "optimization": true,
+          "fileReplacements": [
+            {
+              "replace": "apps/dash/src/environments/environment.ts",
+              "with": "apps/dash/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "dash:build",
+        "host": "0.0.0.0"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "dash:build:development"
+        },
+        "production": {
+          "buildTarget": "dash:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/dash/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/dash/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      },
+      "dependsOn": [
+        {
+          "projects": "self",
+          "target": "lint",
+          "params": "ignore"
+        }
+      ]
+    }
+  },
+  "tags": []
+}
