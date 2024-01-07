@@ -52,7 +52,7 @@ const ConfigScreen = () => {
   return (
     <Flex flexDirection="column" className={css({ margin: '80px', maxWidth: '800px' })}>
       <Form>
-        <Heading>App Config</Heading>
+        <Heading>Amatak Hosting Panel.</Heading>
         <Paragraph>Welcome to Amatak CMS.</Paragraph>
       </Form>
     </Flex>
